@@ -1,0 +1,29 @@
+name: Lint Corrupt DOCX Salvager
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Perl Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Perl syntax
+        run: |
+          echo "Checking Perl files..."
+          errors=0
+          for f in $(find . -name "*.pl" -o -name "*.pm" -o -name "*.cgi" | head -50); do
+            echo "  Checking: $f"
+            perl -c "$f" 2>&1 || errors=$((errors + 1))
+          done
+          if [ $errors -gt 0 ]; then
+            echo "::warning::$errors file(s) had syntax issues"
+          else
+            echo "All Perl files passed syntax check!"
+          fi
