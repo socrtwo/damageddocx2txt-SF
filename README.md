@@ -1,5 +1,10 @@
 # Corrupt DOCX Salvager
 
+<!--PAGES_LINK_BANNER-->
+> 🌐 **Live page:** [https://socrtwo.github.io/damageddocx2txt-SF/](https://socrtwo.github.io/damageddocx2txt-SF/)  
+> 📦 **Releases:** [github.com/socrtwo/damageddocx2txt-SF/releases](https://github.com/socrtwo/damageddocx2txt-SF/releases)
+<!--/PAGES_LINK_BANNER-->
+
 Salvages readable text from damaged DOCX (Word 2007+) files by directly parsing the XML inside the zip archive, bypassing Word's file validation.
 
 **Language:** Perl  
