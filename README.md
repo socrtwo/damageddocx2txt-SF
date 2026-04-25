@@ -1,6 +1,11 @@
 <!--MODERNIZED:v1-->
 # Damageddocx2txt
 
+<!--PAGES_LINK_BANNER-->
+> 🌐 **Live page:** [https://socrtwo.github.io/damageddocx2txt-SF/](https://socrtwo.github.io/damageddocx2txt-SF/)  
+> 📦 **Releases:** [github.com/socrtwo/damageddocx2txt-SF/releases](https://github.com/socrtwo/damageddocx2txt-SF/releases)
+<!--/PAGES_LINK_BANNER-->
+
 > Migrated from SourceForge via SF2GH Migrator
 
 [![Live page](https://img.shields.io/badge/live-page-ff2e93?style=for-the-badge)](https://socrtwo.github.io/damageddocx2txt-SF/)
