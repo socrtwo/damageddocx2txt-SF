@@ -14,43 +14,62 @@
 
 ---
 
-Salvages readable text from damaged DOCX (Word 2007+) files by directly parsing the XML inside the zip archive, bypassing Word's file validation.
+Salvage readable text from damaged Microsoft Word **`.docx`** (Word 2007+) files
+when Word itself refuses to open them — by parsing the XML inside the zip
+package directly and bypassing Word's strict validation. Originally a
+Windows/Perl command-line tool migrated from SourceForge; now a fully offline,
+cross-platform **web / PWA** app that runs entirely in your browser. Your file
+never leaves your device.
 
-**Language:** Perl  
-**License:** MIT
+**Language:** JavaScript (zero dependencies) · **License:** MIT
 
 ## Features
 
-- Extracts text from corrupt DOCX files
-- Parses document.xml directly inside the zip archive
-- Bypasses Word's strict file validation
-- Command-line interface for scripting and batch use
-- Outputs clean plain text
+- **Three-stage recovery**, all client-side:
+  1. **Standard ZIP read** — opens the archive and validates each entry.
+  2. **Low-level byte scan** — when the central directory is destroyed, scans the
+     raw bytes for ZIP local-file headers and rebuilds entries one by one.
+  3. **XML repair & text rescue** — fixes truncated/malformed XML, then pulls the
+     text of every paragraph from `word/document.xml` (plus headers, footers and
+     notes), bypassing Word's strict validation.
+- **Primary output: clean `.txt`** — one line per paragraph, tabs and line
+  breaks preserved. A best-effort repaired `.docx` is also offered.
+- **100% offline** — installable as a PWA; works with no network after first load.
+- **No upload, no server** — recovery happens locally via the browser's native
+  `DecompressionStream`/`CompressionStream`.
 
-## System Requirements
+## Install & run
 
-- Perl 5.10 or later
-- Linux, macOS, or Windows (with Strawberry Perl or WSL)
+**Easiest — use the hosted app (and install it):**
+Open <https://socrtwo.github.io/damageddocx2txt-SF/> and click the browser's
+install icon (Chrome/Edge) or *Share → Add to Home Screen* (iOS Safari) to get
+an offline desktop/home-screen app.
 
-## Installation & Usage
+**Or download a platform bundle from [Releases](https://github.com/socrtwo/damageddocx2txt-SF/releases):**
 
-### Running
+| Platform | Bundle | How to run |
+| --- | --- | --- |
+| Windows  | `damageddocx2txt-<ver>-windows.zip`   | Unzip, double-click `DamagedDocx2Txt.bat` |
+| macOS    | `damageddocx2txt-<ver>-macos.zip`     | Unzip, double-click `DamagedDocx2Txt.command` |
+| Linux    | `damageddocx2txt-<ver>-linux.tar.gz`  | Extract, run `./damageddocx2txt.sh` |
+| ChromeOS | `damageddocx2txt-<ver>-chromeos.zip`  | Install the PWA, or open `web/index.html` in Chrome |
+| Android  | `damageddocx2txt-<ver>-android.zip`   | Install the PWA from Chrome |
+| iOS      | `damageddocx2txt-<ver>-ios.zip`       | Add to Home Screen from Safari |
+| Web      | `damageddocx2txt-<ver>-web.zip`       | Drop `web/` on any static host |
+
+Each bundle contains the full offline app plus a per-platform launcher and
+install instructions (`README.txt`). Verify downloads against `SHA256SUMS`.
+
+## Build releases yourself
 
 ```bash
-# Install Perl (if not already installed)
-# Linux/macOS: usually pre-installed
-# Windows: download Strawberry Perl from https://strawberryperl.com/
-
-# Run the script
-perl <script_name>.pl [arguments]
+bash scripts/build-releases.sh v1.0.0   # writes bundles to dist/
+node scripts/test-recovery.mjs          # run the recovery smoke tests
 ```
 
-### Dependencies
-
-If the script uses CPAN modules, install them with:
-```bash
-cpan install Module::Name
-```
+Or trigger the **Build & publish multi-platform releases** GitHub Action and
+enter a version tag — it tests, builds all bundles, and attaches them to a
+fresh GitHub Release.
 
 ## Origin
 
