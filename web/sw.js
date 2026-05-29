@@ -1,8 +1,9 @@
 // Damaged DOCX → Text — minimal cache-first service worker for offline use.
-const CACHE = 'damageddocx2txt-v1';
+const CACHE = 'damageddocx2txt-v2';
 const ASSETS = [
   './',
   './index.html',
+  './immortal-inflate.js',
   './recovery.js',
   './manifest.webmanifest',
   './icon.svg',

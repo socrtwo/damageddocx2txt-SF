@@ -35,8 +35,10 @@ never leaves your device.
 - **Primary output: clean `.txt`** — one line per paragraph, tabs and line
   breaks preserved. A best-effort repaired `.docx` is also offered.
 - **100% offline** — installable as a PWA; works with no network after first load.
-- **No upload, no server** — recovery happens locally via the browser's native
-  `DecompressionStream`/`CompressionStream`.
+- **No upload, no server** — recovery happens locally. Decompression uses the
+  bundled **Immortal Inflater** (`immortal-inflate.js`), a fault-tolerant pure-JS
+  DEFLATE decoder from [Universal-File-Repair-Tool](https://github.com/socrtwo/Universal-File-Repair-Tool)
+  that recovers partial data from corrupt/truncated streams instead of failing.
 
 ## Install & run
 
